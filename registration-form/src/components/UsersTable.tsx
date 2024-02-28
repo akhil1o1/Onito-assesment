@@ -4,20 +4,8 @@ import { Box } from "@mui/material"
 import type { GridColDef } from "@mui/x-data-grid"
 import { DataGrid } from "@mui/x-data-grid"
 
-// name: string;
-//    age: number;
-//    sex: string;
-//    mobile: string;
-//    govtIssuedIdType: string;
-//    govtIssuedId: string;
-//    address: string;
-//    city: string;
-//    state: string;
-//    country: string;
-//    pincode: string;
-
 const columns: GridColDef[] = [
-{ field: 'id', headerName: 'ID', width: 70 },
+  { field: "id", headerName: "ID", width: 70 },
   { field: "name", headerName: "First name", width: 130 },
   {
     field: "age",
@@ -67,8 +55,10 @@ const columns: GridColDef[] = [
 ]
 
 function UsersTable() {
-  const users = useAppSelector((state: RootState) => state.app.users);
+  // ---------------------- STATES ---------------------
+  const users = useAppSelector((state: RootState) => state.app.users)
 
+  // ---------------------- MARKUP ---------------------
   return (
     <Box className="users-table">
       <DataGrid
@@ -76,7 +66,7 @@ function UsersTable() {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
+            paginationModel: { page: 0, pageSize: 10 },
           },
         }}
         pageSizeOptions={[5, 10]}

@@ -14,11 +14,11 @@ interface PersonalDetails {
 }
 
 interface AddressDetails {
-  address: string
-  state: string
-  city: string
-  country: string
-  pincode: string
+  address?: string
+  state?: string
+  city?: string
+  country?: string
+  pincode?: string
 }
 
 interface InitialState {
@@ -52,6 +52,9 @@ const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
+    updateStage(state, action: PayloadAction<number>) {
+      state.stage = action.payload
+    },
     updatePersonalDetails(state, action: PayloadAction<PersonalDetails>) {
       return {
         ...state,
@@ -59,18 +62,39 @@ const appSlice = createSlice({
       }
     },
     updateAddressDetails(state, action: PayloadAction<AddressDetails>) {
-      return {
-        ...state,
-        addressDetails: { ...state.addressDetails, ...action.payload },
+      const userData = {
+        ...state.personalDetails,
+        ...action.payload,
       }
+
+      // Set the ID for the newly added user
+      const id = (state.users.length + 1).toString()
+
+      // Create a new user object with the ID and userData
+      const newUser: User = {
+        id,
+        ...userData,
+      }
+
+      // Update the users array with the new user
+      state.users.push(newUser)
+
+      // Reset the personalDetails and addressDetails
+      state.personalDetails = initialState.personalDetails
+      state.addressDetails = initialState.addressDetails
+      state.stage = 0
     },
-    resetDetails(state) {
+    resetDetails() {
       return initialState
     },
   },
 })
 
-export const { updatePersonalDetails, updateAddressDetails, resetDetails } =
-  appSlice.actions
+export const {
+  updatePersonalDetails,
+  updateAddressDetails,
+  resetDetails,
+  updateStage,
+} = appSlice.actions
 
 export default appSlice.reducer

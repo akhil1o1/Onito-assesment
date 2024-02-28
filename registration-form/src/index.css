@@ -24,7 +24,7 @@ code {
 
 
 .registration-form {
-  width: 70dvw;
+  width: 75dvw;
   margin-inline: auto;
   padding: 1rem 2rem;
   border: 5px solid gray;
@@ -33,7 +33,7 @@ code {
   background-color: #f1f6f5;
 }
 .users-table {
-  width: 70%;
+  width: 75%;
   margin-inline: auto;
   margin-top: 2rem;
   background-color: #f1f6f5;
